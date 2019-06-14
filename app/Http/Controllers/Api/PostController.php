@@ -26,7 +26,9 @@ class PostController extends Controller
         ->join('categories','posts.category_id','categories.id')
         ->select('posts.id','posts.title',
         'posts.content','posts.date_written','posts.featured_image',
-        'posts.votes_up','posts.votes_down','posts.user_id','users.name as autherName',
+        'posts.votes_up','posts.votes_down',
+        'posts.voters_up','posts.voters_down',
+        'posts.user_id','users.name as autherName',
         'users.avater as autherAvater','posts.category_id','categories.title as categoryTitle')        
         ->with(['comments', 'author','category'])
         ->paginate(env('POSTS_PER_PAGE'));
@@ -77,6 +79,8 @@ class PostController extends Controller
         $post->user_id = $user->id;
         $post->votes_up = 0;
         $post->votes_down = 0;
+        $post->voters_up = null;
+        $post->voters_down = null;
         $post->date_written = Carbon::now()->format('y-m-d H:i:s');
         $post->featured_image_name = 'image name';
         if($request->hasFile('featured_image')){

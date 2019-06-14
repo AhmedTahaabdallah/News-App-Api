@@ -79,7 +79,9 @@ class CategoryController extends Controller
         ->join('categories','posts.category_id','categories.id')
         ->select('posts.id','posts.title',
         'posts.content','posts.date_written','posts.featured_image',
-        'posts.votes_up','posts.votes_down','posts.user_id','users.name as autherName',
+        'posts.votes_up','posts.votes_down',
+        'posts.voters_up','posts.voters_down',
+        'posts.user_id','users.name as autherName',
         'users.avater as autherAvater','posts.category_id','categories.title as categoryTitle')
         ->paginate(env('POSTS_PER_PAGE'));
         return new PostsResources($posts);

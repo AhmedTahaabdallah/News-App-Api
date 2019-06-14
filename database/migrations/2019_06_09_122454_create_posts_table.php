@@ -23,6 +23,8 @@ class CreatePostsTable extends Migration
             $table->string('featured_image_name')->nullable();
             $table->integer('votes_up')->nullable();
             $table->integer('votes_down')->nullable();
+            $table->integer('voters_up')->nullable();
+            $table->integer('voters_down')->nullable();
 
             // Relationships
             $table->integer('user_id');

@@ -13,6 +13,8 @@ class Post extends Model
         'featured_image',
         'votes_up',
         'votes_down',
+        'voters_up',
+        'voters_down',
         'user_id',
         'category_id'
     ];
