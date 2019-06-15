@@ -140,6 +140,11 @@ class PostController extends Controller
         if($post == null){
             return new PostResources(['error' => 'post not found']);
         }
+
+        if($post->user_id != $user->id){
+            return new PostResources(['error' => 'you are not the author for this post!']);
+        }
+
         if($request->has('title')){
             if(strlen(trim($request->get('title'))) < 20 ){
                 return new PostResources(['error' => 'The lowest number of post title is 20 letters']);
@@ -206,12 +211,19 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
         $post = Post::find($id);
         if($post == null){
             return new PostResources(['error' => 'post not found']);
         }
+
+        $user = $request->user();
+
+        if($post->user_id != $user->id){
+            return new PostResources(['error' => 'you are not the author for this post!']);
+        }
+
         $imageName = $post->featured_image_name;
         $myfile_path = public_path().'/images/posts/' . $imageName;
         $post->delete();
