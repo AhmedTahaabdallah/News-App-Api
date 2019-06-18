@@ -47,7 +47,7 @@ class CommentsController extends Controller
         }     
         $comment = new Comment();
         $comment->content = trim($request->get('content'));
-        $comment->date_written = Carbon::now()->format('y-m-d H:i:s');;
+        $comment->date_written = Carbon::now()->format('Y-m-d H:i:s');;
         $comment->post_id = $request->get('post_id');
         $comment->user_id = $request->user()->id;
         $comment->save();

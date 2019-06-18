@@ -81,7 +81,7 @@ class PostController extends Controller
         $post->votes_down = 0;
         $post->voters_up = null;
         $post->voters_down = null;
-        $post->date_written = Carbon::now()->format('y-m-d H:i:s');
+        $post->date_written = Carbon::now()->format('Y-m-d H:i:s');
         $post->featured_image_name = 'image name';
         if($request->hasFile('featured_image')){
             /*$image = $request->file('featured_image');
